@@ -81,7 +81,7 @@ Amortisman = Toplam maliyet / Yıllık tasarruf
 
 Aşağıdaki link üzerinden projeyi canlı olarak görüntüleyebilirsiniz:
 
-👉 https://username.github.io/gunes-enerjisi-hesaplama/
+👉 https://moamir369.github.io/gunes-enerjisi-hesaplama/
 
 ---
 
