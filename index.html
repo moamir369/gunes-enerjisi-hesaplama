@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Güneş Enerjisi Hesaplama Aracı</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Güneş Enerjisi Hesaplama Aracı</h1>
+    <p>
+      Kullanıcı kişi sayısını, şehri, panel gücünü, elektrik fiyatını ve maliyet değerlerini girer;
+      sistem gerekli panel sayısını, maliyeti ve amortisman süresini hesaplar.
+    </p>
+  </header>
+
+  <main class="container">
+    <div class="layout">
+      <aside class="card input-panel">
+        <h2>Bilgileri Gir</h2>
+
+        <label for="city">Şehir</label>
+        <select id="city">
+          <option value="konya" selected>Konya</option>
+          <option value="ankara">Ankara</option>
+          <option value="istanbul">İstanbul</option>
+          <option value="antalya">Antalya</option>
+          <option value="izmir">İzmir</option>
+          <option value="custom">Manuel değer</option>
+        </select>
+
+        <label for="sunHours">Günlük etkili güneşlenme süresi (saat/gün)</label>
+        <input id="sunHours" type="number" value="7.5" step="0.1" min="1" />
+
+        <label for="people">Kişi sayısı</label>
+        <input id="people" type="number" value="5" min="1" />
+
+        <label for="monthlyPerPerson">Kişi başı aylık tüketim (kWh)</label>
+        <input id="monthlyPerPerson" type="number" value="90" min="1" />
+        <p class="small">Örnek: 5 kişi × 90 kWh = 450 kWh/ay</p>
+
+        <label for="panelPower">Panel gücü (W)</label>
+        <input id="panelPower" type="number" value="550" min="100" />
+
+        <label for="efficiency">Sistem verimi (%)</label>
+        <input id="efficiency" type="number" value="75" min="1" max="100" />
+
+        <label for="electricityPrice">Elektrik birim fiyatı (TL/kWh)</label>
+        <input id="electricityPrice" type="number" value="3.92" step="0.01" min="0" />
+
+        <label for="costPerKw">Kurulum maliyeti (TL/kW)</label>
+        <input id="costPerKw" type="number" value="30000" min="0" />
+
+        <label for="extraCost">Ek maliyet (TL)</label>
+        <input id="extraCost" type="number" value="11000" min="0" />
+
+        <label for="panelArea">Bir panel alanı (m²)</label>
+        <input id="panelArea" type="number" value="2.5" step="0.1" min="0" />
+
+        <div class="actions">
+          <button onclick="calculateSolar()">Hesapla</button>
+          <button class="secondary" onclick="window.print()">PDF / Yazdır</button>
+        </div>
+      </aside>
+
+      <section>
+        <div class="card">
+          <h2>Sonuç Özeti</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>Yıllık Tüketim</h3>
+              <span id="yearlyConsumptionBox">-</span>
+            </div>
+
+            <div class="box">
+              <h3>Gerekli Panel</h3>
+              <span id="panelCountBox">-</span>
+            </div>
+
+            <div class="box">
+              <h3>Kurulu Güç</h3>
+              <span id="installedPowerBox">-</span>
+            </div>
+
+            <div class="box">
+              <h3>Amortisman</h3>
+              <span id="paybackBox">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Detaylı Hesaplama</h2>
+          <div id="calculationDetails"></div>
+        </div>
+
+        <div class="card">
+          <h2>Maliyet ve Fatura Tablosu</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Kalem</th>
+                <th>Hesap</th>
+                <th>Tutar</th>
+              </tr>
+            </thead>
+            <tbody id="costTable"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Yıllara Göre Birikimli Tasarruf</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Yıl</th>
+                <th>Yıllık Tasarruf</th>
+                <th>Birikimli Tasarruf</th>
+                <th>Durum</th>
+              </tr>
+            </thead>
+            <tbody id="savingTable"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Amortisman Grafiği</h2>
+          <canvas id="chart" width="900" height="500"></canvas>
+          <p id="chartComment" class="note"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>Güneş Enerjisi Hesaplama Aracı - HTML CSS JS</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
